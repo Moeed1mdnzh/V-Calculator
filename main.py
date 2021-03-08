@@ -9,8 +9,9 @@ pre_area = 0
 area = 0
 machine = calculate()
 pen = draw((255,0,0),(0,0,255))
+phrase = ''
 def findObject(org,image):
-	global frame,l_green,h_green,pre_area,area
+	global frame,l_green,h_green,pre_area,area,phrase
 	hsv = cv2.cvtColor(image,cv2.COLOR_BGR2HSV)
 	mask = cv2.inRange(hsv,l_green,h_green)
 	cnts,_ = cv2.findContours(mask,cv2.RETR_LIST,cv2.CHAIN_APPROX_SIMPLE)
@@ -23,7 +24,9 @@ def findObject(org,image):
 			Y = int(M['m01'] / M['m00'])
 			if pre_area != 0:
 				pressed = area-pre_area 
-				org = pen.Draw(org,pen.getColor(),pressed=machine.click(pressed),x=X,y=Y)
+				org,phrase = pen.Draw(org,pen.getColor(),phrase,pressed=machine.click(pressed),X=X,Y=Y)
+				cv2.putText(org,phrase,(100,70),cv2.FONT_HERSHEY_TRIPLEX,1,(0,255,0),2)
+				pre_area = area
 				return org
 			pre_area = area
 	return []
