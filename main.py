@@ -8,7 +8,7 @@ h_green = (86,255,255)
 pre_area = 0 
 area = 0
 machine = calculate()
-pen = draw((255,0,0),(0,0,255))
+pen = draw((130,130,255),(255,180,180))
 phrase = ''
 def findObject(org,image):
 	global frame,l_green,h_green,pre_area,area,phrase
@@ -25,7 +25,7 @@ def findObject(org,image):
 			if pre_area != 0:
 				pressed = area-pre_area 
 				org,phrase = pen.Draw(org,pen.getColor(),phrase,pressed=machine.click(pressed),X=X,Y=Y)
-				cv2.putText(org,phrase,(100,70),cv2.FONT_HERSHEY_TRIPLEX,1,(0,255,0),2)
+				cv2.putText(org,phrase,(100,70),cv2.FONT_HERSHEY_TRIPLEX,1,(130,255,130),2)
 				pre_area = area
 				return org
 			pre_area = area

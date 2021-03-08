@@ -17,14 +17,16 @@ class draw(object):
 		x,y = 100,100
 		for row in self.signs:
 			for sign in row:
-				cv2.rectangle(frame,(x,y),(x+80,y+80),colors[1],4)
-				cv2.putText(frame,sign,(x+40,y+40),cv2.FONT_HERSHEY_TRIPLEX,0.9,colors[0],2)
+				cv2.rectangle(frame,(x,y),(x+80,y+80),colors[1],10)
+				cv2.putText(frame,sign,(x+35,y+45),cv2.FONT_HERSHEY_TRIPLEX,0.9,colors[0],3)
 				if pressed:
 					SIGN = self.machine.operate(phrase,(X,Y))
-					print(sign)
-					if SIGN == 'C': phrase = ''
-					if SIGN == 'D': phrase = phrase[:len(phrase)-1]
-					if SIGN == '=': phrase = self.machine.Calc(phrase)
+					if SIGN == 'C': 
+						phrase = ''
+					elif SIGN == 'D': 
+						phrase = phrase[:len(phrase)-1]
+					elif SIGN == '=': 
+						phrase = self.machine.Calc(phrase)
 					else: phrase += SIGN
 					pressed = False
 				x += 80 
@@ -48,7 +50,7 @@ class calculate:
 	def Calc(self,phrase=""):
 		try:
 			phrase = phrase.replace('x','*')
-			return eval(phrase)
+			return str(round(eval(phrase),2))
 		except:
 			return '[ERROR]'
 
