@@ -2,7 +2,7 @@ import cv2
 import numpy as np 
 from calculator import draw,calculate
 
-cam = cv2.VideoCapture(1,cv2.CAP_DSHOW)  
+cam = cv2.VideoCapture(0)  
 l_green = (36,80,0) 
 h_green = (86,255,255)
 pre_area = 0 
